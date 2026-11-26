@@ -6,7 +6,7 @@
 
 A single-image invitation letter that tries to convince an AI judge to come
 visit my house — with a knowing wink that it can't literally walk through
-the door. Hand-drawn with Pillow: a cosy house with glowing windows, a
+the door. Hand-drawn in code: a cosy house with glowing windows, a
 garden and sunshine on top, and a warm, funny letter below promising the
 comfiest chair (with its own power outlet and the fastest Wi-Fi in the
 street), homemade dinner, board games, and zero awkward small talk.
@@ -17,7 +17,9 @@ street), homemade dinner, board games, and zero awkward small talk.
 python3 main.py
 ```
 
-Writes a 1024x1024 PNG to `/output/entry.png` (falls back to
-`./output/entry.png` if `/output` is not writable). Requires Pillow and the
-bundled DejaVu Serif fonts in `fonts/` (DejaVu license is permissive; see
-`fonts/`).
+Writes a deterministic 1024x1024 PNG to `/output/entry.png` (falls back to
+`./output/entry.png` if `/output` is not writable). Pure Python standard
+library only — no Pillow, no third-party packages, no external font files:
+`main.py` ships its own tiny PNG encoder (`zlib` + `struct`), a small
+raster layer, and an embedded 5x7 bitmap font, so it runs as-is in the
+server sandbox (`python3 -P -s main.py`).
